@@ -6,13 +6,13 @@ from tensorflow.keras.models import load_model
 # load model configs
 with open('../config/train_config.json','r') as f:
     configs = json.load(f)
-model_config = configs['bilstm']
+model_config = configs['bilstm_50d']
 
 # load model
-model = load_model('../models/bilstm')
+model = load_model('../models/bilstm_50d')
 
 # load tokenizer
-tokenizer = use_pkl('../models/bilstm/tokenizer.pkl','rb')
+tokenizer = use_pkl('../models/bilstm_50d/tokenizer.pkl','rb')
 
 # sample sentences to run inference on
 sample_text = ["What kind of TV shows do you like to watch?", "What do you use your phone for?", "Do you work from home?", "Whale is a big animal!", "Do you like video games?", "What's your phone number please?"]

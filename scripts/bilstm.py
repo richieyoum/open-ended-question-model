@@ -16,23 +16,23 @@ from util import use_pkl
 # load model configs
 with open('../config/train_config.json','r') as f:
     configs = json.load(f)
-model_config = configs['bilstm']
+model_config = configs['bilstm_100d']
 
 # load data
 df = load_amazon_data(data_dir='../data/amazon_data')
 
 # split into open ended and close ended
-open_ended = df[df['questionType']=='open-ended']
-close_ended = df[df['questionType']=='yes/no']
+open_ended = df[df['questionType'] == 'open-ended']
+close_ended = df[df['questionType'] == 'yes/no']
 # remove open ended questions shorter than 15 characters in length (ref: notebooks/EDA.ipynb)
-open_ended = open_ended[open_ended.question.apply(len)>15]
+open_ended = open_ended[open_ended.question.apply(len) > 15]
 
 # combine the two dfs back
 df = pd.concat([open_ended, close_ended])
 
 # set true class as 1, false class as 0
 x = df.question.values
-y = np.where(df.questionType=='open-ended', 1, 0)
+y = np.where(df.questionType == 'open-ended', 1, 0)
 
 # split into train and test sets
 xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=.2, stratify=y)
@@ -61,7 +61,7 @@ for word, i in word_index.items():
 # define model
 model = Sequential([
     Embedding(len(word_index) + 1, model_config['emb_dim'], weights=[embedding_matrix], input_length=model_config['max_seq_len'], trainable=model_config['emb_trainable']),
-    Bidirectional(LSTM(model_config["lstm_units"], return_sequences=True, recurrent_dropout=model_config["recurrent_dropout"])),
+    Bidirectional(LSTM(model_config["lstm_units"], return_sequences=True, dropout=model_config["recurrent_dropout"])),
     GlobalMaxPool1D(),
     Dense(model_config['dense_units'], activation='relu'),
     Dropout(model_config['dropout']),
@@ -73,5 +73,5 @@ model.summary()
 model.compile(optimizer=Adam(learning_rate=model_config['learning_rate']), metrics=[Precision(), Recall(), AUC()], loss='binary_crossentropy')
 
 model.fit(xtrain, ytrain, batch_size=1024, epochs=model_config['epochs'], validation_data=(xtest, ytest))
-model.save('../models/bilstm')
-use_pkl('../models/bilstm/tokenizer.pkl', 'wb', tokenizer)
+model.save('../models/bilstm_100d')
+use_pkl('../models/bilstm_100d/tokenizer.pkl', 'wb', tokenizer)
