@@ -1,9 +1,7 @@
 # Open-ended question classifier
-<hr>
 Classify between open-ended and close-ended questions, where close-ended questions lead to 'yes/no' answers, and the rest being open-ended questions.
 
 ## Downloading data
-<hr>
 
 ### Amazon QA dataset
 You can download dataset [here](http://jmcauley.ucsd.edu/data/amazon/qa/). Simply download data from available categories and place them in the data/amazon_data
@@ -21,7 +19,6 @@ These categories seemed to me more generalizable in other domains. Feel free to 
 Glove 100d embedding used for model training. Download Glove vectors [here](https://nlp.stanford.edu/data/glove.6B.zip)
 
 ## Installing dependencies
-<hr>
 
 Tested on Python 3.7+
 ```bash
@@ -29,7 +26,6 @@ pip install tensorflow==2.3.0 keras-tuner pandas gzip
 ```
 
 ## Usage
-<hr>
 
 ### Training
 I used KerasTuner to perform hyperparameter search. With current configuration, getting the best parameter took ~ 8 hours on my laptop with Nvidia GTX 2070 MaxQ GPU.
@@ -86,7 +82,6 @@ python scripts/sample_inference.py
 ```
 
 ## About Model
-<hr>
 
 This model leverages pre-trained glove embedding, which is connected with Bidirectional LSTM, pooling and some dense layer.
 
@@ -100,12 +95,10 @@ The final model achieves around 94~95% precision, recall, and F-1 score.
 ![classification report](models/amzn_model/classification_report.png)
 
 ## Future Improvements
-<hr>
 
 - Try including all the available categories from the dataset.
 - HP search only included changes in unit values, not necessarily regarding inclusion of layers (or, exclusion thereof).
 - I'd be curious to know what Transformer models will perform on this dataset, though I suspect only a marginal improvement.
 
 ## Contributing
-<hr>
 Pull requests welcome!
