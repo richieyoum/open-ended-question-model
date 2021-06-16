@@ -10,11 +10,11 @@ def load_amazon_data(data_dir: str) -> pd.DataFrame:
     """Read in amazon data from data directory
 
     Args:
-        data_dir (str): data directory
+        data_dir: data directory
 
     Returns:
         pd.DataFrame: amazon data
-  """
+    """
 
     def parse(path):
         g = gzip.open(path, 'rb')
@@ -41,12 +41,12 @@ def load_amazon_data(data_dir: str) -> pd.DataFrame:
 def load_glove(fp: str) -> Dict:
     """Load glove embedding from filepath
 
-  Args:
-      fp (str): filepath to glove file
+    Args:
+        fp: filepath to glove file
 
-  Returns:
-      Dict: loaded glove embedding
-  """
+    Returns:
+        Dict: loaded glove embedding
+    """
 
     glove_w2v = {}
     with open(fp, 'r', encoding='utf-8') as f:
@@ -56,6 +56,26 @@ def load_glove(fp: str) -> Dict:
             vec = np.array([float(value) for value in splitlines[1:]])
             glove_w2v[word] = vec
     return glove_w2v
+
+
+def get_embedding_matrix(glove: Dict, word_index: Dict, emb_dim: int) -> Dict:
+    """ Get embedding matrix from pretrained glove dict
+
+    Args:
+        glove: glove w2v dict. Can get from load_glove function
+        word_index: word index from tokenizer
+        emb_dim: embedding dimension
+
+    Returns:
+        embedding matrix from glove dict
+    """
+    # populate embedding matrix using glove w2v
+    embedding_matrix = np.zeros((len(word_index) + 1, emb_dim))
+    for word, i in word_index.items():
+        embedding_vector = glove.get(word)
+        if embedding_vector is not None:
+            embedding_matrix[i] = embedding_vector
+    return embedding_matrix
 
 
 def use_pkl(fp: str, mode: str, obj=None):
