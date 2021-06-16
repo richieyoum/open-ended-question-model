@@ -1,4 +1,8 @@
 .idea/
-data/
+data/amazon_data/*
+data/glove/*
+!data/amazon_data/.gitkeep
+!data/glove/.gitkeep
+models/amzn_model_kerastuner/*
 .ipynb_checkpoints/
 __pycache__/
