@@ -1,6 +1,7 @@
 import pickle
 from typing import Any
 
+
 def use_pkl(fp: str, mode: str, obj=None):
     """save objects as pickle or read pickle objects
 
