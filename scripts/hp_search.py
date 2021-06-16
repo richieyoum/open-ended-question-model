@@ -18,7 +18,7 @@ from tensorflow.keras.metrics import Precision, Recall
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
-from scripts.load_data import load_glove, load_amazon_data
+from scripts.util import load_glove, load_amazon_data
 import kerastuner as kt
 
 # load data
