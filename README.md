@@ -1,6 +1,8 @@
 # Open-ended question classifier
 Classify between open-ended and close-ended questions, where close-ended questions lead to 'yes/no' answers, and the rest being open-ended questions.
 
+![question](https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/question-mark-icon-on-white-puzzle-royalty-free-image-917901148-1558452934.jpg?crop=1.00xw:0.752xh;0,0.137xh&resize=1200:*)
+
 ## Downloading data
 
 ### Amazon QA dataset
