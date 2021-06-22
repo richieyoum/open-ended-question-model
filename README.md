@@ -100,7 +100,7 @@ The final model achieves around 94~95% precision, recall, and F-1 score.
 
 - Try including all the available categories from the dataset.
 - HP search only included changes in unit values, not necessarily regarding inclusion of layers (or, exclusion thereof).
-- I'd be curious to know what Transformer models will perform on this dataset, though I suspect only a marginal improvement.
+- I'd be curious to know how finetuned Transformer models will perform on this dataset, though I suspect only a marginal improvement from here on.
 
 ## Contributing
 Pull requests welcome!
